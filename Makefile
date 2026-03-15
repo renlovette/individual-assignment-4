@@ -17,6 +17,7 @@ results/horse_pop_plot_largest_sd.png results/horse_pops_plot.png results/horses
 # render quarto report in HTML
 docs/index.html: results reports/qmd_example.qmd
 	quarto render reports/qmd_example.qmd --to html --output-dir ../docs --output index.html
+	mv docs/qmd_example.html docs/index.html
 
 # render quarto report in PDF
 reports/qmd_example.pdf: results reports/qmd_example.qmd
@@ -28,4 +29,3 @@ clean:
 	rm -rf docs
 	rm -rf reports/qmd_example.pdf \
 		reports/qmd_example_files
-		
