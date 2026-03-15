@@ -14,14 +14,17 @@ results/horse_pop_plot_largest_sd.png results/horse_pops_plot.png results/horses
 	python source/generate_figures.py --input_dir="data/00030067-eng.csv" \
 		--out_dir="results"
 
-# render quarto report in HTML
-docs/index.html: results reports/qmd_example.qmd
-	quarto render reports/qmd_example.qmd --to html --output-dir ../docs --output index.html
-	mv docs/qmd_example.html docs/index.html
+# render quarto report in HTML and PDF
+reports/qmd_example.html: results reports/qmd_example.qmd
+	quarto render reports/qmd_example.qmd --to html
 
-# render quarto report in PDF
 reports/qmd_example.pdf: results reports/qmd_example.qmd
 	quarto render reports/qmd_example.qmd --to pdf
+
+# copy to docs for GitHub Pages
+docs/index.html: reports/qmd_example.html
+	mkdir -p docs
+	cp reports/qmd_example.html docs/index.html
 
 # clean
 clean:
